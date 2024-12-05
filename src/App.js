@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './App.css';
+import logo from './logo.svg';
 
 function App() {
   const [resume, setResume] = useState("");
@@ -37,6 +38,9 @@ function App() {
     <div>
       <h1>Resume Keyword Checker</h1>
       <form onSubmit={handleSubmit}>
+      <div className="logo-container">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
         <div className="textarea-container">
           <label htmlFor="resume">Resume</label>
           <textarea

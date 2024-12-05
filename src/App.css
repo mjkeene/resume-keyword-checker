@@ -3,8 +3,9 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
+  animation: App-logo-spin infinite 20s linear;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -29,11 +30,14 @@
 }
 
 @keyframes App-logo-spin {
-  from {
+  0% {
     transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate(360deg);  /* Clockwise */
+  }
+  100% {
+    transform: rotate(-360deg);  /* Counterclockwise */
   }
 }
 
@@ -108,7 +112,7 @@ ul {
   padding-left: 0;
   margin-left: 20px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Creates 5 equal-width columns */
+  grid-template-columns: repeat(10, 1fr); /* Creates 5 equal-width columns */
   gap: 10px; /* Adds space between items */
 }
 
