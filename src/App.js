@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './App.css';
 
 function App() {
   const [resume, setResume] = useState("");
@@ -36,22 +37,35 @@ function App() {
     <div>
       <h1>Resume Keyword Checker</h1>
       <form onSubmit={handleSubmit}>
-        <textarea
-          placeholder="Paste Resume Here"
-          value={resume}
-          onChange={(e) => setResume(e.target.value)}
-          rows="10"
-          cols="50"
-        />
-        <textarea
-          placeholder="Paste Job Description Here"
-          value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
-          rows="10"
-          cols="50"
-        />
-        <button type="submit">Compare</button>
+        <div className="textarea-container">
+          <label htmlFor="resume">Resume</label>
+          <textarea
+            id="resume"
+            className="textarea"
+            placeholder="Paste Resume Here"
+            value={resume}
+            onChange={(e) => setResume(e.target.value)}
+            rows="10"
+            cols="50"
+          />
+        </div>
+
+        <div className="textarea-container">
+          <label htmlFor="jobDescription">Job Description</label>
+          <textarea
+            id="jobDescription"
+            className="textarea"
+            placeholder="Paste Job Description Here"
+            value={jobDescription}
+            onChange={(e) => setJobDescription(e.target.value)}
+            rows="10"
+            cols="50"
+          />
+        </div>
+
+        <button className="button" type="submit">Compare</button>
       </form>
+
       {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
         <div>
           <h2>Missing Keywords:</h2>

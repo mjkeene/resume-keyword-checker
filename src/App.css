@@ -36,3 +36,92 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size:  1.5rem;
+}
+
+.textarea {
+  width: 85%;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  resize: both;  /* Allows resizing both horizontally and vertically */
+  overflow: auto; /* Ensures scrolling if the content exceeds the size */
+}
+
+button {
+  display:  block;
+  padding: 20px 40px;
+  font-size: 20px;
+  height:  60px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.4s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Creates 5 equal-width columns */
+  gap: 10px; /* Adds space between items */
+}
+
+li {
+  background-color: #e9ecef;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center; /* Center align the text */
+  font-size: 14px; /* Optional: adjust font size to fit the grid */
+}
+
+/* Style for the text area container to add spacing */
+.textarea-container {
+  width: 100%;
+  margin-bottom: 15px; /* Space between the label and the textarea */
+  text-align: left; /* Align label to the left */
+}
+
+/* Style the label */
+.textarea-container label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  display: block;  /* Ensure label is block-level and sits above the textarea */
+  margin-bottom: 8px; /* Space between label and textarea */
+}
+
+/* Textarea styling */
+.textarea {
+  width: 85%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  resize: both; /* Allow resizing */
+  overflow: auto;
+}
