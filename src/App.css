@@ -56,6 +56,10 @@ h1 {
   font-size:  1.5rem;
 }
 
+p {
+  margin-left: 20px;
+}
+
 .textarea {
   width: 85%;
   padding: 10px;
@@ -77,6 +81,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  margin-left: 20px;
   transition: background-color 0.4s ease;
 }
 
@@ -102,8 +107,9 @@ li {
 
 /* Style for the text area container to add spacing */
 .textarea-container {
-  width: 100%;
-  margin-bottom: 15px; /* Space between the label and the textarea */
+  width: 85%;
+  margin-left: 20px;
+  margin-bottom: 20px; /* Space between the label and the textarea */
   text-align: left; /* Align label to the left */
 }
 
