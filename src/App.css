@@ -56,6 +56,20 @@ h1 {
   font-size:  1.5rem;
 }
 
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-size:  1.5rem;
+}
+
+h3 {
+  color: #333;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-size:  1.2rem;
+}
+
 p {
   margin-left: 20px;
 }
@@ -92,6 +106,7 @@ button:hover {
 ul {
   list-style-type: none;
   padding-left: 0;
+  margin-left: 20px;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Creates 5 equal-width columns */
   gap: 10px; /* Adds space between items */
