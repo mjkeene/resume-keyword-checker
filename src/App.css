@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
 .App {
   text-align: center;
 }
@@ -12,6 +14,15 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+/* Style for the logo */
+.logo {
+  position: absolute; /* Position the logo in the top-left corner */
+  top: 10px;
+  left: 10px;
+  height: 60px; /* Adjust the size of the logo */
+  width: auto;
 }
 
 .App-header {
@@ -29,6 +40,34 @@
   color: #61dafb;
 }
 
+.typing-animation {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 4px solid #333; /* Cursor effect */
+  width: 0;
+  animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
 @keyframes App-logo-spin {
   0% {
     transform: rotate(0deg);
@@ -42,7 +81,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #f7f7f7;
   margin: 0;
 }
@@ -54,35 +93,42 @@ body {
 }
 
 h1 {
+  font-family: 'Montserrat', sans-serif;
   color: #333;
   text-align: center;
   margin-bottom: 20px;
   font-size:  2rem;
-  font-weight: 700; /* Bold font weight for title */
+  font-weight: 500;
 }
 
 h2 {
+  font-family: 'Montserrat', sans-serif;
   color: #333;
   margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
   font-size:  1.5rem;
+  font-weight: 500;
 }
 
 h3 {
+  font-family: 'Montserrat', sans-serif;
   color: #333;
   margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
   font-size:  1.2rem;
+  font-weight: 500;
 }
 
 p {
+  font-family: 'Montserrat', sans-serif;
   margin-left: 20px;
   margin-right: 20px;
 }
 
 .textarea {
+  font-family: 'Montserrat', sans-serif;
   width: 85%;
   padding: 10px;
   font-size: 14px;
@@ -93,6 +139,7 @@ p {
 }
 
 button {
+  font-family: 'Montserrat', sans-serif;
   display:  block;
   padding: 20px 40px;
   font-size: 20px;
