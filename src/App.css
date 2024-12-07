@@ -80,6 +80,25 @@
   }
 }
 
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.dropzone p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.dropzone:hover {
+  background-color: #f0f0f0;
+}
+
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f7f7f7;
@@ -189,7 +208,7 @@ li {
 /* Style the label */
 .textarea-container label {
   font-size: 18px;
-  font-weight: 525;
+  font-weight: 700;
   color: #333;
   display: block;  /* Ensure label is block-level and sits above the textarea */
   margin-bottom: 10px; /* Space between label and textarea */
