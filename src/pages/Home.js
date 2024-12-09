@@ -7,6 +7,22 @@ import * as pdfjsLib from 'pdfjs-dist';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.9.155/pdf.worker.min.js`;
 
+const quotes = [
+  "The best way to get started is to quit talking and begin doing. – Walt Disney",
+  "Success is not the key to happiness. Happiness is the key to success. – Albert Schweitzer",
+  "Don't let yesterday take up too much of today. – Will Rogers",
+  "You learn more from failure than from success. Don’t let it stop you. Failure builds character. – Unknown",
+  "It’s not whether you get knocked down, it’s whether you get up. – Vince Lombardi",
+  "The only way to do great work is to love what you do. – Steve Jobs",
+  "It always seems impossible until it’s done. – Nelson Mandela",
+  "Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill",
+  "The future belongs to those who believe in the beauty of their dreams. – Eleanor Roosevelt",
+  "Hardships often prepare ordinary people for an extraordinary destiny. – C.S. Lewis",
+  "Believe you can and you're halfway there. – Theodore Roosevelt",
+  "The only limit to our realization of tomorrow is our doubts of today. – Franklin D. Roosevelt",
+  "You are never too old to set another goal or to dream a new dream. – C.S. Lewis",
+  "Success doesn’t come from what you do occasionally, it comes from what you do consistently. – Marie Forleo"
+];
 
 function Home() {
   const [resume, setResume] = useState("");
@@ -14,6 +30,13 @@ function Home() {
   const [result, setResult] = useState(null);
   const [resumePlaceholder, setResumePlaceholder] = useState(""); // State to manage placeholder text
   const [jobDescriptionPlaceholder, setJobDescriptionPlaceholder] = useState(""); // State to manage Job Description placeholder
+  const [quote, setQuote] = useState("");
+
+  useEffect(() => {
+    // Select a random quote when the component loads
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    setQuote(randomQuote);
+  }, []);
 
   // Typing animation for placeholder
   useEffect(() => {
@@ -112,63 +135,66 @@ function Home() {
   return (
     <div>
       <a href="https://tinyurl.com/37ndbumw" target="_blank" rel="noopener noreferrer">
-          <img src={logo2} alt="Logo" className="logo" />  {/* Use the imported logo */}
-        </a>
+        <img src={logo2} alt="Logo" className="logo" />
+      </a>
 
       <h1>Resume Keyword Checker</h1>
-      <form onSubmit={handleSubmit}>
-      <div className="logo-container">
-          <img src={logo} className="App-logo" alt="logo" />
+      <div className="home-container">
+        <div className="quote-banner">
+          <p className="motivational-quote">{quote}</p>
         </div>
-        <div className="textarea-container">
-          <label htmlFor="resume">Resume</label>
-          <textarea
-            id="resume"
-            className="textarea"
-            placeholder={resumePlaceholder} // Use the animated placeholder
-            value={resume}
-            onChange={(e) => setResume(e.target.value)}
-            rows="10"
-            cols="50"
-          />
+        <form onSubmit={handleSubmit}>
+          <div className="logo-container">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+          <div className="textarea-container">
+            <label htmlFor="resume">Resume</label>
+            <textarea
+              id="resume"
+              className="textarea"
+              placeholder="Paste your resume here..."
+              value={resume}
+              onChange={(e) => setResume(e.target.value)}
+              rows="10"
+              cols="50"
+            />
+          </div>
+          <div className="textarea-container">
+            <label htmlFor="jobDescription">Job Description</label>
+            <textarea
+              id="jobDescription"
+              className="textarea"
+              placeholder="Paste the job description here..."
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              rows="10"
+              cols="50"
+            />
+          </div>
+          <button className="button" type="submit">Compare</button>
+        </form>
+
+        <div {...getRootProps()} className="dropzone">
+          <input {...getInputProps()} />
+          <p>Drag and drop your resume PDF here, or click to select a file</p>
         </div>
 
-        <div className="textarea-container">
-          <label htmlFor="jobDescription">Job Description</label>
-          <textarea
-            id="jobDescription"
-            className="textarea"
-            placeholder={jobDescriptionPlaceholder}
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-            rows="10"
-            cols="50"
-          />
-        </div>
-
-        <button className="button" type="submit">Compare</button>
-      </form>
-
-      <div {...getRootProps()} className="dropzone">
-        <input {...getInputProps()} />
-        <p>Drag and drop your resume PDF here, or click to select a file</p>
+        {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
+          <div>
+            <h2>Missing Keywords:</h2>
+            <ul>
+              {result.missingKeywords.map((word, index) => (
+                <li key={index}>{word}</li>
+              ))}
+            </ul>
+            <h3>Similarity Score: {result.similarityScore}</h3>
+          </div>
+        ) : (
+          <p>No missing keywords found.</p>
+        )}
       </div>
-
-      {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
-        <div>
-          <h2>Missing Keywords:</h2>
-          <ul>
-            {result.missingKeywords.map((word, index) => (
-              <li key={index}>{word}</li>
-            ))}
-          </ul>
-          <h3>Similarity Score: {result.similarityScore}</h3>
-        </div>
-      ) : (
-        <p>No missing keywords found.</p>
-      )}
     </div>
   );
-}
+};
 
 export default Home;
