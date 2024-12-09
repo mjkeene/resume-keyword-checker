@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import BlogDetail from './pages/BlogDetail';  // BlogDetail component to show full post content
 import logo2 from "./JobHero.png";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />  {/* Capture dynamic ID */}
       </Routes>
     </Router>
   );
