@@ -152,7 +152,7 @@ function Home() {
             <textarea
               id="resume"
               className="textarea"
-              placeholder="Paste your resume here..."
+              placeholder={resumePlaceholder}
               value={resume}
               onChange={(e) => setResume(e.target.value)}
               rows="10"
@@ -164,7 +164,7 @@ function Home() {
             <textarea
               id="jobDescription"
               className="textarea"
-              placeholder="Paste the job description here..."
+              placeholder={jobDescriptionPlaceholder}
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               rows="10"

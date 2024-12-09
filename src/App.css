@@ -368,11 +368,53 @@ li {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 80%;
   margin: 0 auto;
+  opacity: 1;
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Blinking cursor effect */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 
 .motivational-quote {
   font-size: 1.0rem;
-  color: #f5f7fa; /* Dark text */
+  color: #f5f7fa;
   font-style: italic;
   font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  width: 0;
+  animation: typing 4s steps(40) 1s 1 normal both, blink 0.75s step-end infinite;
 }
