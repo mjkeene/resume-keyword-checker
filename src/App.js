@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
-import BlogDetail from './pages/BlogDetail';  // BlogDetail component to show full post content
+import BlogDetail from './pages/BlogDetail';
+import About from './pages/About';
 import logo2 from "./JobHero.png";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/blog">Blog Articles</Link></li>
+            <li><Link to="/about">About</Link></li>
           </ul>
         </nav>
       </header>
@@ -23,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetail />} />  {/* Capture dynamic ID */}
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );
