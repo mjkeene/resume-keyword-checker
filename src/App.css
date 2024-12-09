@@ -98,6 +98,58 @@
   background-color: #f0f0f0;
 }
 
+header {
+  display: flex;
+  align-items: center; /* Aligns logo and nav items vertically */
+  justify-content: flex-start; /* Creates space between logo and nav */
+  padding: 0 20px; /* Optional: Adds some horizontal padding */
+}
+
+main {
+  margin-top: 60px; /* Push main content below the fixed header */
+  padding: 20px; /* Optional: Add some padding around the content */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  margin-top: 15px;
+  margin-left: 100px; /* Pushes navigation to the right */
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem; /* Adds space between nav items */
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav ul li {
+  margin-right: 0px; /* Space between links */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: #007BFF; /* Highlight color on hover */
+}
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -222,4 +274,45 @@ li {
   border-radius: 5px;
   resize: both; /* Allow resizing */
   overflow: auto;
+}
+
+.blog-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto; /* Center content on the page */
+}
+
+.blog-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between articles */
+}
+
+.blog-articles article {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-articles article h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.blog-articles article p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.blog-articles article a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.blog-articles article a:hover {
+  text-decoration: underline;
 }
