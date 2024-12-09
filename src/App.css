@@ -316,3 +316,45 @@ li {
 .blog-articles article a:hover {
   text-decoration: underline;
 }
+
+.about-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.about-container h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-container h2 {
+  color: #007bff;
+  margin-top: 20px;
+}
+
+.about-container p {
+  line-height: 1.6;
+  color: #555;
+}
+
+.about-container ul {
+  margin-left: 20px;
+  color: #555;
+}
+
+.about-container li {
+  margin-bottom: 10px;
+}
+
+.about-container footer {
+  margin-top: 30px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
