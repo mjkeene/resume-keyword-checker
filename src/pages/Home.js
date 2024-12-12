@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import '../App.css';
 import logo from '../logo.svg';
 import logo2 from '../JobHero.png';
-import { useDropzone } from 'react-dropzone'; // Import react-dropzone
-import * as pdfjsLib from 'pdfjs-dist';
+// import { useDropzone } from 'react-dropzone';
+// import * as pdfjsLib from 'pdfjs-dist';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.9.155/pdf.worker.min.js`;
+// pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.9.155/pdf.worker.min.js`;
 
 const quotes = [
   "The best way to get started is to quit talking and begin doing. – Walt Disney",
@@ -68,41 +68,41 @@ function Home() {
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
-  // Handle resume PDF parsing
-  const parsePDF = async (file) => {
-    try {
-      const fileReader = new FileReader();
-      fileReader.onload = async () => {
-        const typedArray = new Uint8Array(fileReader.result);
-        const pdf = await pdfjsLib.getDocument(typedArray).promise;
-        let text = '';
-        for (let i = 0; i < pdf.numPages; i++) {
-          const page = await pdf.getPage(i + 1);
-          const textContent = await page.getTextContent();
-          text += textContent.items.map(item => item.str).join(' ');
-        }
-        setResume(text); // Set parsed resume text to the state
-      };
-      fileReader.readAsArrayBuffer(file); // Read the file as ArrayBuffer
-    } catch (error) {
-      console.error("Error parsing PDF:", error);
-    }
-  };
+  // // Handle resume PDF parsing
+  // const parsePDF = async (file) => {
+  //   try {
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = async () => {
+  //       const typedArray = new Uint8Array(fileReader.result);
+  //       const pdf = await pdfjsLib.getDocument(typedArray).promise;
+  //       let text = '';
+  //       for (let i = 0; i < pdf.numPages; i++) {
+  //         const page = await pdf.getPage(i + 1);
+  //         const textContent = await page.getTextContent();
+  //         text += textContent.items.map(item => item.str).join(' ');
+  //       }
+  //       setResume(text); // Set parsed resume text to the state
+  //     };
+  //     fileReader.readAsArrayBuffer(file); // Read the file as ArrayBuffer
+  //   } catch (error) {
+  //     console.error("Error parsing PDF:", error);
+  //   }
+  // };
 
-  // Handle drag-and-drop functionality
-  const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0];
-    if (file && file.type === "application/pdf") {
-      parsePDF(file); // If the file is a PDF, parse it
-    } else {
-      alert("Please upload a PDF file.");
-    }
-  };
+  // // Handle drag-and-drop functionality
+  // const onDrop = (acceptedFiles) => {
+  //   const file = acceptedFiles[0];
+  //   if (file && file.type === "application/pdf") {
+  //     parsePDF(file); // If the file is a PDF, parse it
+  //   } else {
+  //     alert("Please upload a PDF file.");
+  //   }
+  // };
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: ".pdf", // Only allow PDF files
-  });
+  // const { getRootProps, getInputProps } = useDropzone({
+  //   onDrop,
+  //   accept: ".pdf", // Only allow PDF files
+  // });
 
 
   const handleSubmit = async (e) => {
@@ -174,10 +174,12 @@ function Home() {
           <button className="button" type="submit">Compare</button>
         </form>
 
+        {/*
         <div {...getRootProps()} className="dropzone">
           <input {...getInputProps()} />
           <p>Drag and drop your resume PDF here, or click to select a file</p>
         </div>
+        */}
 
         {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
           <div>
