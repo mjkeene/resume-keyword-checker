@@ -1,72 +1,48 @@
-# from flask import Flask, request, jsonify
-# from flask_cors import CORS
+import json
 
-# app = Flask(__name__)
-# CORS(app)
+"""
+Simplify logic for now to upload to APIG / Lambda. Dependency issues with spacy library,
+this will work for now.
+"""
 
-# @app.route("/compare", methods=["POST"])
-# def compare_texts():
-#     data = request.json
-#     resume = data.get("resume", "").lower()
-#     job_description = data.get("jobDescription", "").lower()
-
-#     # Tokenize and find unique words
-#     resume_words = set(resume.split())
-#     job_description_words = set(job_description.split())
-
-#     # Find missing words
-#     missing_words = list(job_description_words - resume_words)
-
-#     return jsonify({"missingWords": missing_words})
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
-
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import spacy
-from sklearn.metrics.pairwise import cosine_similarity
-
-# Load spaCy model for NLP tasks
-nlp = spacy.load("en_core_web_md")
-
-app = Flask(__name__)
-CORS(app)
+def extract_keywords(text):
+    # Split the text into words and filter out short words
+    words = {word.lower() for word in text.split() if word.isalnum() and len(word) > 2}
+    return words
 
 def compare_keywords(resume_text, job_description_text):
-    resume_doc = nlp(resume_text.lower())
-    job_desc_doc = nlp(job_description_text.lower())
-
-    # Extract relevant keywords (nouns and proper nouns)
-    resume_keywords = [token.text for token in resume_doc if token.pos_ in ['NOUN', 'PROPN']]
-    job_desc_keywords = [token.text for token in job_desc_doc if token.pos_ in ['NOUN', 'PROPN']]
+    # Extract keywords from both texts
+    resume_keywords = extract_keywords(resume_text)
+    job_desc_keywords = extract_keywords(job_description_text)
 
     # Find missing keywords
-    missing_keywords = set(job_desc_keywords) - set(resume_keywords)
+    missing_keywords = job_desc_keywords - resume_keywords
+    return missing_keywords
 
-    # Calculate semantic similarity between job description and resume
-    resume_vector = resume_doc.vector
-    job_desc_vector = job_desc_doc.vector
-    similarity_score = cosine_similarity([resume_vector], [job_desc_vector])[0][0]
+def lambda_handler(event, context):
+    try:
+        # Parse input from the event body
+        body = json.loads(event.get('body', '{}'))
+        resume_text = body.get('resume', '')
+        job_description_text = body.get('job_description', '')
 
-    # Convert to standard Python float to avoid
-    # TypeError: Object of type float32 is not JSON serializable
-    similarity_score = float(similarity_score)
+        if not resume_text or not job_description_text:
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'error': 'Both resume and job description are required'})
+            }
 
-    return missing_keywords, similarity_score
+        # Perform keyword comparison
+        missing_keywords = compare_keywords(resume_text, job_description_text)
 
-@app.route('/compare', methods=['POST'])
-def compare():
-    data = request.get_json()
-    resume_text = data['resume']
-    job_description_text = data['job_description']
-
-    missing_keywords, similarity_score = compare_keywords(resume_text, job_description_text)
-
-    return jsonify({
-        'missing_keywords': list(missing_keywords),
-        'similarity_score': similarity_score
-    })
-
-if __name__ == '__main__':
-    app.run(debug=True)
+        return {
+            'statusCode': 200,
+            'body': json.dumps({
+                'missing_keywords': list(missing_keywords)
+            })
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }

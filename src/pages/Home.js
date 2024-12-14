@@ -109,7 +109,7 @@ function Home() {
     e.preventDefault();
     
     try {
-      const response = await fetch("http://127.0.0.1:5000/compare", {
+      const response = await fetch("https://ljamc3nez9.execute-api.us-west-2.amazonaws.com/default/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ resume, job_description: jobDescription }),
@@ -122,7 +122,7 @@ function Home() {
       if (data && data.missing_keywords) {
         setResult({
           missingKeywords: data.missing_keywords,
-          similarityScore: data.similarity_score,
+          // similarityScore: data.similarity_score,
         });
       } else {
         console.error("No missing keywords in response data");
