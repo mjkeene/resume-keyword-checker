@@ -1,3 +1,42 @@
+<h2>Resume Keyword Checker</h2>
+
+[Link to frontend on S3](http://resume-keyword-checker-frontend.s3-website-us-west-2.amazonaws.com/)
+
+<h3>Overview</h3>
+
+* The Resume Keyword Checker is a tool designed to help job seekers optimize their resumes by identifying critical keywords from job descriptions and comparing them with their resumes. By pinpointing missing or underutilized keywords, this tool ensures that resumes are tailored for Applicant Tracking Systems (ATS) and stand out to recruiters.
+* This was inspired by websites like [jobscan](https://www.jobscan.co/)
+
+<h3>Features</h3>
+
+* Job Description Parsing: Extracts keywords and phrases from job postings.
+* Resume Analysis: Scans resumes for keywords relevant to the job description.
+* Keyword Matching: Highlights missing, overused, or underutilized keywords.
+* Customizable Matching Criteria: Supports fine-tuning of keyword matching logic based on user preferences (e.g., synonyms, word frequency). -- not yet
+* User-Friendly Reports: Generates clear, actionable feedback for improving resume alignment.
+
+<h3>Benefits</h3>
+
+* Increases chances of passing ATS screenings.
+* Simplifies the resume tailoring process for specific roles.
+* Empowers users with data-driven insights into their resumes.
+* Free; jobscan is not.
+
+
+<h3>Technologies Used</h3>
+
+* <b>Programming Languages</b>: JavaScript, Python
+Libraries:
+
+	* Frontend: `React` for building a user-friendly web interface.
+	* Backend: `Flask` to serve the API and connect with analysis logic.
+	* `pandas`: For data manipulation and analysis.
+	* `nltk` or `spaCy`: For natural language processing.
+	* File Handling: Supports pasting in resume for now; expand to parsing `.txt`, `.docx`, and `.pdf` formats for resumes.
+
+
+<i>React boilerplate README below this line with run instructions.</i>
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
