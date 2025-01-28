@@ -26,6 +26,7 @@
 <h3>Technologies Used</h3>
 
 * <b>Programming Languages</b>: JavaScript, Python
+
 Libraries:
 
 	* Frontend: `React` for building a user-friendly web interface.
@@ -36,6 +37,7 @@ Libraries:
 
 
 <i>React boilerplate README below this line with run instructions.</i>
+
 ---
 # Getting Started with Create React App
 
