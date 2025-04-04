@@ -254,6 +254,7 @@ li {
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px; /* Space between the label and the textarea */
+  margin-top: 20px;
   text-align: left; /* Align label to the left */
 }
 
@@ -475,4 +476,46 @@ li {
 
 .job-board p strong {
   color: #007bff;
+}
+
+.input-container {
+  display: flex;
+  margin-left: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 0.25rem;
+}
+
+.search-link-container {
+  display: flex;
+  margin-left: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.copy-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.message-box-container{
+
 }

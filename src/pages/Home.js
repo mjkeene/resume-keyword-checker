@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import '../App.css';
 import logo from '../logo.svg';
 import logo2 from '../JobHero.png';
-// import { useDropzone } from 'react-dropzone';
-// import * as pdfjsLib from 'pdfjs-dist';
-
-// pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.9.155/pdf.worker.min.js`;
 
 const quotes = [
   "The best way to get started is to quit talking and begin doing. – Walt Disney",
@@ -25,12 +21,22 @@ const quotes = [
 ];
 
 function Home() {
+  const [company, setCompany] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [showSearchLink, setShowSearchLink] = useState(false);  // State to track button click
+  const [advocateMessage, setAdvocateMessage] = useState("");
+  const [copied, setCopied] = useState(false); // determine if advocateMessage has been copied
+  const [hasEditedMessage, setHasEditedMessage] = useState(false); // only update advocateMessage if it hasn't been edited
   const [resume, setResume] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [result, setResult] = useState(null);
   const [resumePlaceholder, setResumePlaceholder] = useState(""); // State to manage placeholder text
   const [jobDescriptionPlaceholder, setJobDescriptionPlaceholder] = useState(""); // State to manage Job Description placeholder
   const [quote, setQuote] = useState("");
+
+  // Helper to title case strings
+  const titleCase = (str) =>
+    str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
   useEffect(() => {
     // Select a random quote when the component loads
@@ -68,45 +74,51 @@ function Home() {
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
-  // // Handle resume PDF parsing
-  // const parsePDF = async (file) => {
-  //   try {
-  //     const fileReader = new FileReader();
-  //     fileReader.onload = async () => {
-  //       const typedArray = new Uint8Array(fileReader.result);
-  //       const pdf = await pdfjsLib.getDocument(typedArray).promise;
-  //       let text = '';
-  //       for (let i = 0; i < pdf.numPages; i++) {
-  //         const page = await pdf.getPage(i + 1);
-  //         const textContent = await page.getTextContent();
-  //         text += textContent.items.map(item => item.str).join(' ');
-  //       }
-  //       setResume(text); // Set parsed resume text to the state
-  //     };
-  //     fileReader.readAsArrayBuffer(file); // Read the file as ArrayBuffer
-  //   } catch (error) {
-  //     console.error("Error parsing PDF:", error);
-  //   }
-  // };
+    // Generate the Google search URL
+    const generateSearchUrls = () => {
+      const googleQuery = `site:linkedin.com/in/ ${jobTitle} recruiter ${company}`;
+      const linkedInQuery = `${jobTitle} recruiter ${company}`;
+    
+      return {
+        google: `https://www.google.com/search?q=${encodeURIComponent(googleQuery)}`,
+        linkedIn: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(linkedInQuery)}`
+      };
+    };
 
-  // // Handle drag-and-drop functionality
-  // const onDrop = (acceptedFiles) => {
-  //   const file = acceptedFiles[0];
-  //   if (file && file.type === "application/pdf") {
-  //     parsePDF(file); // If the file is a PDF, parse it
-  //   } else {
-  //     alert("Please upload a PDF file.");
-  //   }
-  // };
+    const handleCompareClick = () => {
+      // Title-case the job title and company here
+      const formattedJobTitle = titleCase(jobTitle);
+      const formattedCompanyName = titleCase(company);
 
-  // const { getRootProps, getInputProps } = useDropzone({
-  //   onDrop,
-  //   accept: ".pdf", // Only allow PDF files
-  // });
+      // Set to true when the Compare button is clicked
+      setShowSearchLink(true);
 
+      // Scroll all the way down to the bottom
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',  // Enables smooth scrolling
+        });
+      }, 100); // Optional slight delay if needed
+
+      if (company && jobTitle && !hasEditedMessage) {
+        const message = 
+      `Hi [Advocate Name],
+
+I'm reaching out because I'm very interested in the ${formattedJobTitle} role at ${formattedCompanyName}. I believe my background and experience align well with the responsibilities and qualifications, and I'd love the opportunity to connect or learn more.
+
+Thanks for your time, and I hope to hear from you!
+
+Best regards,
+[Your Name]`;
+    
+      setAdvocateMessage(message);
+      }
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    handleCompareClick();
     
     try {
       const response = await fetch("https://ljamc3nez9.execute-api.us-west-2.amazonaws.com/default/compare", {
@@ -148,6 +160,30 @@ function Home() {
             <img src={logo} className="App-logo" alt="logo" />
           </div>
           <div className="textarea-container">
+              <label htmlFor="company">Company Name</label>
+              <input
+                id="company"
+                type="text"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="e.g. Airbnb"
+                className="input"
+              />
+            </div>
+
+            <div className="textarea-container">
+              <label htmlFor="jobTitle">Job Title</label>
+              <input
+                id="jobTitle"
+                type="text"
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+                placeholder="e.g. Data Engineer"
+                className="input"
+              />
+            </div>
+
+          <div className="textarea-container">
             <label htmlFor="resume">Resume</label>
             <textarea
               id="resume"
@@ -158,6 +194,7 @@ function Home() {
               rows="10"
               cols="50"
             />
+
           </div>
           <div className="textarea-container">
             <label htmlFor="jobDescription">Job Description</label>
@@ -174,13 +211,6 @@ function Home() {
           <button className="button" type="submit">Compare</button>
         </form>
 
-        {/*
-        <div {...getRootProps()} className="dropzone">
-          <input {...getInputProps()} />
-          <p>Drag and drop your resume PDF here, or click to select a file</p>
-        </div>
-        */}
-
         {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
           <div>
             <h2>Missing Keywords:</h2>
@@ -189,12 +219,92 @@ function Home() {
                 <li key={index}>{word}</li>
               ))}
             </ul>
-            <h3>Similarity Score: {result.similarityScore}</h3>
+            {/* <h3>Similarity Score: {result.similarityScore}</h3> */}
           </div>
         ) : (
           <p>No missing keywords found.</p>
         )}
       </div>
+
+      {/* Only show the link after clicking the "Compare" button */}
+      {showSearchLink && company && jobTitle && (
+        <div className="textarea-container">
+          <label htmlFor="search-link-container">Google and LinkedIn Search for Recruiter/Company Advocate</label>
+          <a
+            href={generateSearchUrls().google}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="search-link"
+          >
+            Google results for "{jobTitle}" recruiter at "{company}"
+          </a>
+          <br />
+          <a
+            href={generateSearchUrls().linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="search-link"
+          >
+            LinkedIn results for "{jobTitle}" recruiter at "{company}"
+          </a>
+
+        </div>
+          )}
+
+        {showSearchLink && advocateMessage && (
+          <div className="textarea-container">
+            <label htmlFor="advocateMessageTemplate">Advocate Message Template</label>
+            <div style={{ position: 'relative' }}>
+              <textarea
+                id="advocateMessageTemplate"
+                className="textarea"
+                value={advocateMessage}
+                onChange={(e) => { 
+                  setAdvocateMessage(e.target.value);
+                  setHasEditedMessage(true);
+                }}
+                rows="12"
+                cols="60"
+              />
+              <button
+                className="copy-button"
+                style={{
+                  top: 5,
+                  right: 5,
+                  padding: '5px 10px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  const cleanedAdvocateMessage = advocateMessage
+                  navigator.clipboard.writeText(cleanedAdvocateMessage);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                }}
+              >
+                {copied ? 'Copied!' : 'Copy Message'}
+              </button>
+                <p><strong>Tips for Advocate Message:</strong>
+                <br />
+                1. Mention your shared connection or interest (school, company, technology)<br />
+                2. Keep it short and clear<br />
+                3. Be polite and appreciative of their time<br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                </p>
+              </div>
+            </div>
+          )}
     </div>
   );
 };
