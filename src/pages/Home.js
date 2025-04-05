@@ -150,7 +150,7 @@ Best regards,
         <img src={logo2} alt="Logo" className="logo" />
       </a>
 
-      <h1>Resume & Outreach Optimizer</h1>
+      <h1>Resume & Networking Optimizer</h1>
       <div className="home-container">
         <div className="quote-banner">
           <p className="motivational-quote">{quote}</p>
