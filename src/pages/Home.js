@@ -205,7 +205,7 @@ Best regards,
         </form>
 
         {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
-          <div>
+          <div className="textarea-container">
             <h2>Missing Keywords:</h2>
             <ul>
               {result.missingKeywords.map((word, index) => (
@@ -222,7 +222,7 @@ Best regards,
       {/* Only show the link after clicking the "Compare" button */}
       {showSearchLink && company && jobTitle && (
         <div className="textarea-container">
-          <label htmlFor="search-link-container">Google and LinkedIn Search for Recruiter/Company Contact</label>
+        <h2>Google and LinkedIn Search for Recruiter/Company Contact</h2>
           <a
             href={generateSearchUrls().google}
             target="_blank"
@@ -246,7 +246,7 @@ Best regards,
 
         {showSearchLink && networkingMessage && (
           <div className="textarea-container">
-            <label htmlFor="networkingMessageTemplate">Networking Message Template</label>
+            <h2>Networking Message Template</h2>
             <div style={{ position: 'relative' }}>
               <textarea
                 id="networkingMessageTemplate"
