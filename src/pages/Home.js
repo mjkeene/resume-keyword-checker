@@ -24,9 +24,9 @@ function Home() {
   const [company, setCompany] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [showSearchLink, setShowSearchLink] = useState(false);  // State to track button click
-  const [advocateMessage, setAdvocateMessage] = useState("");
-  const [copied, setCopied] = useState(false); // determine if advocateMessage has been copied
-  const [hasEditedMessage, setHasEditedMessage] = useState(false); // only update advocateMessage if it hasn't been edited
+  const [networkingMessage, setNetworkingMessage] = useState("");
+  const [copied, setCopied] = useState(false); // determine if networkingMessage has been copied
+  const [hasEditedMessage, setHasEditedMessage] = useState(false); // only update networkingMessage if it hasn't been edited
   const [resume, setResume] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [result, setResult] = useState(null);
@@ -103,7 +103,7 @@ function Home() {
 
       if (company && jobTitle && !hasEditedMessage) {
         const message = 
-      `Hi [Advocate Name],
+      `Hi [Contact Name],
 
 I'm reaching out because I'm very interested in the ${formattedJobTitle} role at ${formattedCompanyName}. I believe my background and experience align well with the responsibilities and qualifications, and I'd love the opportunity to connect or learn more.
 
@@ -112,7 +112,7 @@ Thanks for your time, and I hope to hear from you!
 Best regards,
 [Your Name]`;
     
-      setAdvocateMessage(message);
+      setNetworkingMessage(message);
       }
     };
 
@@ -150,7 +150,7 @@ Best regards,
         <img src={logo2} alt="Logo" className="logo" />
       </a>
 
-      <h1>Resume Keyword Checker</h1>
+      <h1>Resume & Outreach Optimizer</h1>
       <div className="home-container">
         <div className="quote-banner">
           <p className="motivational-quote">{quote}</p>
@@ -229,7 +229,7 @@ Best regards,
       {/* Only show the link after clicking the "Compare" button */}
       {showSearchLink && company && jobTitle && (
         <div className="textarea-container">
-          <label htmlFor="search-link-container">Google and LinkedIn Search for Recruiter/Company Advocate</label>
+          <label htmlFor="search-link-container">Google and LinkedIn Search for Recruiter/Company Contact</label>
           <a
             href={generateSearchUrls().google}
             target="_blank"
@@ -251,16 +251,16 @@ Best regards,
         </div>
           )}
 
-        {showSearchLink && advocateMessage && (
+        {showSearchLink && networkingMessage && (
           <div className="textarea-container">
-            <label htmlFor="advocateMessageTemplate">Advocate Message Template</label>
+            <label htmlFor="networkingMessageTemplate">Networking Message Template</label>
             <div style={{ position: 'relative' }}>
               <textarea
-                id="advocateMessageTemplate"
+                id="networkingMessageTemplate"
                 className="textarea"
-                value={advocateMessage}
+                value={networkingMessage}
                 onChange={(e) => { 
-                  setAdvocateMessage(e.target.value);
+                  setNetworkingMessage(e.target.value);
                   setHasEditedMessage(true);
                 }}
                 rows="12"
@@ -276,19 +276,20 @@ Best regards,
                   cursor: 'pointer',
                 }}
                 onClick={() => {
-                  const cleanedAdvocateMessage = advocateMessage
-                  navigator.clipboard.writeText(cleanedAdvocateMessage);
+                  const cleanedNetworkingMessage = networkingMessage
+                  navigator.clipboard.writeText(cleanedNetworkingMessage);
                   setCopied(true);
                   setTimeout(() => setCopied(false), 2000);
                 }}
               >
                 {copied ? 'Copied!' : 'Copy Message'}
               </button>
-                <p><strong>Tips for Advocate Message:</strong>
+                <p><strong>Tips for Networking Message:</strong>
                 <br />
-                1. Mention your shared connection or interest (school, company, technology)<br />
-                2. Keep it short and clear<br />
-                3. Be polite and appreciative of their time<br />
+                1. Mention your shared connection or interest (school, company, technology).<br />
+                2. Keep it short and clear.<br />
+                3. Be polite and appreciative of their time.<br />
+                4. <b>Follow up!</b> Over 80% of responses come after following-up. Wait ~1 week for the first follow-up.
                 <br />
                 <br />
                 <br />
