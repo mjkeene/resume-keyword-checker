@@ -22,16 +22,18 @@ const quotes = [
 
 function Home() {
   const [company, setCompany] = useState("");
+  const [companyPlaceholder, setCompanyPlaceholder] = useState('');
   const [jobTitle, setJobTitle] = useState("");
+  const [jobTitlePlaceholder, setJobTitlePlaceholder] = useState('');
   const [showSearchLink, setShowSearchLink] = useState(false);  // State to track button click
   const [networkingMessage, setNetworkingMessage] = useState("");
   const [copied, setCopied] = useState(false); // determine if networkingMessage has been copied
   const [hasEditedMessage, setHasEditedMessage] = useState(false); // only update networkingMessage if it hasn't been edited
   const [resume, setResume] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [result, setResult] = useState(null);
   const [resumePlaceholder, setResumePlaceholder] = useState(""); // State to manage placeholder text
+  const [jobDescription, setJobDescription] = useState("");
   const [jobDescriptionPlaceholder, setJobDescriptionPlaceholder] = useState(""); // State to manage Job Description placeholder
+  const [result, setResult] = useState(null);
   const [quote, setQuote] = useState("");
 
   // Helper to title case strings
@@ -44,34 +46,24 @@ function Home() {
     setQuote(randomQuote);
   }, []);
 
-  // Typing animation for placeholder
-  useEffect(() => {
-    const targetText = "Paste Resume Here"; // Placeholder text to animate
+  // Typing animation for placeholders
+  const typingAnimation = (text, setPlaceholder) => {
     let index = 0;
     const interval = setInterval(() => {
-      setResumePlaceholder(targetText.substring(0, index + 1)); // Gradually set the placeholder text
+      setPlaceholder(() => text.substring(0, index + 1)); // Only update up to current character
       index++;
-      if (index === targetText.length) {
+      if (index === text.length) {
         clearInterval(interval); // Stop the interval when the full text is displayed
       }
-    }, 100); // Adjust the typing speed by modifying the interval time (100ms)
-    
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []);
+    }, 100); // Typing speed is adjustable here (100ms)
+  };
 
-  // Typing animation for Job Description placeholder
+  // Trigger typing animation on each placeholder text
   useEffect(() => {
-    const targetText = "Paste Job Description Here"; // Job Description placeholder text
-    let index = 0;
-    const interval = setInterval(() => {
-      setJobDescriptionPlaceholder(targetText.substring(0, index + 1)); // Gradually set the Job Description placeholder text
-      index++;
-      if (index === targetText.length) {
-        clearInterval(interval); // Stop the interval when the full text is displayed
-      }
-    }, 100); // Adjust the typing speed by modifying the interval time (100ms)
-    
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    typingAnimation('Paste Resume Here', setResumePlaceholder);
+    typingAnimation('Paste Job Description Here', setJobDescriptionPlaceholder);
+    typingAnimation('e.g. AirBnb', setCompanyPlaceholder);
+    typingAnimation('e.g. Product Manager', setJobTitlePlaceholder);
   }, []);
 
     // Generate the Google search URL
@@ -151,6 +143,7 @@ Best regards,
       </a>
 
       <h1>Resume & Networking Optimizer</h1>
+      <h4><i>Find what your resume is missing — and who to contact about it.</i></h4>
       <div className="home-container">
         <div className="quote-banner">
           <p className="motivational-quote">{quote}</p>
@@ -166,7 +159,7 @@ Best regards,
                 type="text"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                placeholder="e.g. Airbnb"
+                placeholder={companyPlaceholder}
                 className="input"
               />
             </div>
@@ -178,24 +171,24 @@ Best regards,
                 type="text"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
-                placeholder="e.g. Data Engineer"
+                placeholder={jobTitlePlaceholder}
                 className="input"
               />
             </div>
 
-          <div className="textarea-container">
-            <label htmlFor="resume">Resume</label>
-            <textarea
-              id="resume"
-              className="textarea"
-              placeholder={resumePlaceholder}
-              value={resume}
-              onChange={(e) => setResume(e.target.value)}
-              rows="10"
-              cols="50"
-            />
+            <div className="textarea-container">
+              <label htmlFor="resume">Resume</label>
+              <textarea
+                id="resume"
+                className="textarea"
+                placeholder={resumePlaceholder}
+                value={resume}
+                onChange={(e) => setResume(e.target.value)}
+                rows="10"
+                cols="50"
+              />
+            </div>
 
-          </div>
           <div className="textarea-container">
             <label htmlFor="jobDescription">Job Description</label>
             <textarea
@@ -290,9 +283,6 @@ Best regards,
                 2. Keep it short and clear.<br />
                 3. Be polite and appreciative of their time.<br />
                 4. <b>Follow up!</b> Over 80% of responses come after following-up. Wait ~1 week for the first follow-up.
-                <br />
-                <br />
-                <br />
                 <br />
                 <br />
                 <br />
