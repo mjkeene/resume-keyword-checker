@@ -137,7 +137,7 @@ Best regards,
     }
     
     try {
-      const response = await fetch("https://ljamc3nez9.execute-api.us-west-2.amazonaws.com/default/compare", {
+      const response = await fetch("https://uv3v39q4x5.execute-api.us-east-2.amazonaws.com/default/compare", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ resume, job_description: jobDescription }),
@@ -150,6 +150,7 @@ Best regards,
       if (data && data.missing_keywords) {
         setResult({
           missingKeywords: data.missing_keywords,
+          topKeywords: data.top_comprehend_keywords
           // similarityScore: data.similarity_score,
         });
       } else {
@@ -162,7 +163,7 @@ Best regards,
 
   return (
     <div>
-      <a href="https://tinyurl.com/37ndbumw" target="_blank" rel="noopener noreferrer">
+      <a href="http://resume-networking-optimizer.s3-website.us-east-2.amazonaws.com/" target="_blank" rel="noopener noreferrer">
         <img src={logo2} alt="Logo" className="logo" />
       </a>
 
@@ -230,23 +231,36 @@ Best regards,
 
         {result && result.missingKeywords && result.missingKeywords.length > 0 ? (
           <div className="textarea-container">
-            <h2>Missing Keywords:</h2>
+            <h2>Missing Keywords from Resume</h2>
             <ul>
               {result.missingKeywords.map((word, index) => (
                 <li key={index}>{word}</li>
               ))}
             </ul>
-            {/* <h3>Similarity Score: {result.similarityScore}</h3> */}
           </div>
         ) : (
           <p>No missing keywords found.</p>
         )}
+
+        {result && result.topKeywords && result.topKeywords.length > 0 ? (
+          <div className="textarea-container">
+            <h2>Top Keywords from Job Description</h2>
+            <ul>
+              {result.topKeywords.map((word, index) => (
+                <li key={index}>{word}</li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>No top keywords found.</p>
+        )}
+
       </div>
 
       {/* Only show the link after clicking the "Compare" button */}
       {showSearchLink && company && jobTitle && (
         <div className="textarea-container">
-        <h2>Google and LinkedIn Search for Recruiter/Company Contact</h2>
+        <h2>Google and LinkedIn Search for Networking Contact</h2>
           <a
             href={generateSearchUrls().google}
             target="_blank"
