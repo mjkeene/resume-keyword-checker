@@ -20,6 +20,10 @@ const quotes = [
   "Success doesn’t come from what you do occasionally, it comes from what you do consistently. – Marie Forleo"
 ];
 
+// TODO: Increase this later when error message is implemented. Resumes and Job Descriptions are hundreds of chars.
+// Minimum length threshold for each document in order to make the API call
+  const MIN_LENGTH = 10;
+
 function Home() {
   const [company, setCompany] = useState("");
   const [companyPlaceholder, setCompanyPlaceholder] = useState('');
@@ -111,6 +115,13 @@ Best regards,
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleCompareClick();
+
+    // TODO: Add descriptive error message when this happens rather than just saying no missing keywords.
+    // Check if the job description or resume meets the minimum length
+    if (jobDescription.length < MIN_LENGTH || resume.length < MIN_LENGTH) {
+      console.log("Resume or Job Description document too short");
+      return; // Exit the function early if the length is too short
+    }
     
     try {
       const response = await fetch("https://ljamc3nez9.execute-api.us-west-2.amazonaws.com/default/compare", {

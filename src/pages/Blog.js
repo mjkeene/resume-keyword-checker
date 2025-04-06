@@ -70,10 +70,23 @@ import AWS from 'aws-sdk';
 function Blog() {
   // Sample local data for blog posts
   const [blogPosts, setBlogPosts] = useState([
-    { id: 1, title: "Understanding React Components", excerpt: "A brief overview of React components..." },
-    { id: 2, title: "Getting Started with CSS Flexbox", excerpt: "A quick guide to CSS Flexbox..." },
-    { id: 3, title: "JavaScript ES6 Features You Should Know", excerpt: "An introduction to the latest ES6 features..." }
-  ]);
+      {
+        id: 1,
+        title: "How to Stand Out in a Competitive Job Market"
+      },
+      {
+        id: 2,
+        title: "5 Common Job Search Mistakes and How to Avoid Them"
+      },
+      {
+        id: 3,
+        title: "Networking Tips for Job Seekers: Building Relationships That Last"
+      },
+      {
+        id: 4,
+        title: "How to Stay Motivated During Your Job Search"
+      }
+    ]);
 
   return (
     <div className="blog-container">
