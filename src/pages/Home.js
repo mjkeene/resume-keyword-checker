@@ -70,36 +70,39 @@ function Home() {
     typingAnimation('e.g. Product Manager', setJobTitlePlaceholder);
   }, []);
 
-    // Generate the Google search URL
-    const generateSearchUrls = () => {
-      const googleQuery = `site:linkedin.com/in/ ${jobTitle} recruiter ${company}`;
-      const linkedInQuery = `${jobTitle} recruiter ${company}`;
-    
-      return {
-        google: `https://www.google.com/search?q=${encodeURIComponent(googleQuery)}`,
-        linkedIn: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(linkedInQuery)}`
-      };
+  // Generate Google and LinkedIn search URLs for recruiter or manager roles
+  const generateSearchUrls = () => {
+    // Build Google query with Boolean logic
+    const googleQuery = `site:linkedin.com/in/ ${jobTitle} (recruiter OR manager) ${company}`;
+
+    // LinkedIn also allows boolean logic, but it's a little different than google
+    const linkedInQuery = `"${jobTitle}" AND ("recruiter" OR "manager") ${company}`;
+
+    return {
+      google: `https://www.google.com/search?q=${encodeURIComponent(googleQuery)}`,
+      linkedIn: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(linkedInQuery)}`
     };
+  };
 
-    const handleCompareClick = () => {
-      // Title-case the job title and company here
-      const formattedJobTitle = titleCase(jobTitle);
-      const formattedCompanyName = titleCase(company);
+  const handleCompareClick = () => {
+    // Title-case the job title and company here
+    const formattedJobTitle = titleCase(jobTitle);
+    const formattedCompanyName = titleCase(company);
 
-      // Set to true when the Compare button is clicked
-      setShowSearchLink(true);
+    // Set to true when the Compare button is clicked
+    setShowSearchLink(true);
 
-      // Scroll all the way down to the bottom
-      setTimeout(() => {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth',  // Enables smooth scrolling
-        });
-      }, 100); // Optional slight delay if needed
+    // Scroll all the way down to the bottom
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth',  // Enables smooth scrolling
+      });
+    }, 100); // Optional slight delay if needed
 
-      if (company && jobTitle && !hasEditedMessage) {
-        const message = 
-      `Hi [Contact Name],
+    if (company && jobTitle && !hasEditedMessage) {
+      const message = 
+    `Hi [Contact Name],
 
 I'm reaching out because I'm very interested in the ${formattedJobTitle} role at ${formattedCompanyName}. I believe my background and experience align well with the responsibilities and qualifications, and I'd love the opportunity to connect or learn more.
 
@@ -107,10 +110,10 @@ Thanks for your time, and I hope to hear from you!
 
 Best regards,
 [Your Name]`;
-    
-      setNetworkingMessage(message);
-      }
-    };
+  
+    setNetworkingMessage(message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -240,7 +243,7 @@ Best regards,
             rel="noopener noreferrer"
             className="search-link"
           >
-            Google results for "{jobTitle}" recruiter at "{company}"
+            Google results for "{jobTitle}" at "{company}"
           </a>
           <br />
           <a
@@ -249,7 +252,7 @@ Best regards,
             rel="noopener noreferrer"
             className="search-link"
           >
-            LinkedIn results for "{jobTitle}" recruiter at "{company}"
+            LinkedIn results for "{jobTitle}" at "{company}"
           </a>
 
         </div>
