@@ -157,7 +157,7 @@ Best regards,
       </a>
 
       <h1>Resume & Networking Optimizer</h1>
-      <h4><i>Find what your resume is missing — and who to contact about it.</i></h4>
+      <h4><i>Fix your resume's blind spots — and connect with the people who care.</i></h4>
       <div className="home-container">
         <div className="quote-banner">
           <p className="motivational-quote">{quote}</p>
