@@ -17,7 +17,10 @@ const quotes = [
   "Believe you can and you're halfway there. – Theodore Roosevelt",
   "The only limit to our realization of tomorrow is our doubts of today. – Franklin D. Roosevelt",
   "You are never too old to set another goal or to dream a new dream. – C.S. Lewis",
-  "Success doesn’t come from what you do occasionally, it comes from what you do consistently. – Marie Forleo"
+  "Success doesn’t come from what you do occasionally, it comes from what you do consistently. – Marie Forleo",
+  "Whether you think you can or you think you can’t, you’re right. – Henry Ford",
+  "I’m convinced that about half of what separates successful entrepreneurs from the non-successful ones is pure perseverance. – Steve Jobs",
+  "Failure is simply the opportunity to begin again, this time more intelligently. – Henry Ford"
 ];
 
 // TODO: Increase this later when error message is implemented. Resumes and Job Descriptions are hundreds of chars.
@@ -102,14 +105,21 @@ function Home() {
 
     if (company && jobTitle && !hasEditedMessage) {
       const message = 
-    `Hi [Contact Name],
+    `Subject: Seeking Insight into [Your Field or Industry]
 
-I'm reaching out because I'm very interested in the ${formattedJobTitle} role at ${formattedCompanyName}. I believe my background and experience align well with the responsibilities and qualifications, and I'd love the opportunity to connect or learn more.
+Hi [Contact Name],
 
-Thanks for your time, and I hope to hear from you!
+I came across your profile while researching professionals in the [${formattedJobTitle}] space and noticed your impressive background at [${formattedCompanyName}]. I'm currently exploring [specific topic or role, e.g., data engineering, autonomous vehicles, software development], and I'd love to hear about your journey and experiences in this space. Would you be open to sharing a few insights or advice?
+
+I'd love to hear how you navigated your career in [Their Field or Industry] and what key factors have influenced your success.
+
+Thanks so much for your time — I really appreciate any guidance you can offer!
 
 Best regards,
-[Your Name]`;
+[Your Name]
+[Your LinkedIn/Contact Info]
+`
+;
   
     setNetworkingMessage(message);
     }
@@ -270,7 +280,7 @@ Best regards,
                   setNetworkingMessage(e.target.value);
                   setHasEditedMessage(true);
                 }}
-                rows="12"
+                rows="16"
                 cols="60"
               />
               <button
@@ -293,21 +303,26 @@ Best regards,
               </button>
                 <p><strong>Tips for Networking Message:</strong>
                 <br />
-                1. Mention your shared connection or interest (school, company, technology).<br />
-                2. Keep it short and clear.<br />
-                3. Be polite and appreciative of their time.<br />
-                4. <b>Follow up!</b> Over 80% of responses come after following-up. Wait ~1 week for the first follow-up.
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
+                1. Make sure there are no [brackets] left (use ctrl + f). Fill those areas in with relevant words for you, then copy the message.<br />
+                2. Keep it short and clear; easy for recipient to read quickly.<br />
+                3. Mention your shared connection or interest (school, company, technology); nice touch but ultimately unnecessary.<br />
+                4. Ask for insight and experience, not job leads or referrals yet.<br />
+                5. First paragraph ends in a question mark. Keep in mind you're interested in them—don't overqualify yourself, just show genuine interest.<br />
+                6. Use "you" and "your" a lot—it's about them; be polite and appreciative of their time.<br />
+                7. Categorize interest clearly (e.g., trying to learn more about data engineering in the autonomous vehicle space).<br />
+                8. <b>Follow up!</b> Over 80% of responses come after following-up. Wait ~1 week for the first follow-up. Note that most cold messages will be ignored (around 80%). Keep trying.
                 <br />
                 <br />
                 </p>
               </div>
+              <p><strong>Useful Resources:</strong>
+              <br />
+              1. <a href="https://linkedin.github.io/career-explorer/" target="_blank">LinkedIn Career Explorer</a>: This shows job skills and similar roles<br />
+              2. <a href="https://www.apollo.io/" target="_blank">Apollo</a>: Find work emails to network<br /> 
+              <br />
+              <br />
+              <br />
+              </p>
             </div>
           )}
     </div>
