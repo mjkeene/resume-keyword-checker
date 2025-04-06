@@ -1,10 +1,10 @@
 <h2>Resume Keyword Checker</h2>
 
-[Link to frontend on S3](http://resume-keyword-checker-frontend.s3-website-us-west-2.amazonaws.com/)
+[Link to frontend on S3](http://resume-networking-optimizer.s3-website.us-east-2.amazonaws.com/)
 
 <h3>Overview</h3>
 
-* The Resume Keyword Checker is a tool designed to help job seekers optimize their resumes by identifying critical keywords from job descriptions and comparing them with their resumes. By pinpointing missing or underutilized keywords, this tool ensures that resumes are tailored for Applicant Tracking Systems (ATS) and stand out to recruiters.
+* The Resume & Networking Optimizer is a tool designed to help job seekers optimize their resumes by identifying critical keywords from job descriptions and comparing them with their resumes, and then network with relevant contacts. By pinpointing missing or underutilized keywords, this tool ensures that resumes are tailored for Applicant Tracking Systems (ATS) and stand out to recruiters. Networking ultimately gets you in front of the right people.
 * This was inspired by websites like [jobscan](https://www.jobscan.co/)
 
 <h3>Features</h3>
@@ -12,6 +12,8 @@
 * Job Description Parsing: Extracts keywords and phrases from job postings.
 * Resume Analysis: Scans resumes for keywords relevant to the job description.
 * Keyword Matching: Highlights missing, overused, or underutilized keywords.
+* Networking contact finder on Google and LinkedIn to make it easy to find relevant contacts.
+* Networking template message to make this frictionless.
 * Customizable Matching Criteria: Supports fine-tuning of keyword matching logic based on user preferences (e.g., synonyms, word frequency). -- not yet
 * User-Friendly Reports: Generates clear, actionable feedback for improving resume alignment.
 
@@ -20,6 +22,7 @@
 * Increases chances of passing ATS screenings.
 * Simplifies the resume tailoring process for specific roles.
 * Empowers users with data-driven insights into their resumes.
+* Easy to find 10-20 relevant connections to reach out to.
 * Free; jobscan is not.
 
 
