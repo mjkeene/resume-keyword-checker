@@ -109,7 +109,7 @@ function Home() {
 
 Hi [Contact Name],
 
-I came across your profile while researching professionals in the [${formattedJobTitle}] space and noticed your impressive background at [${formattedCompanyName}]. I'm currently exploring [specific topic or role, e.g., data engineering, autonomous vehicles, software development], and I'd love to hear about your journey and experiences in this space. Would you be open to sharing a few insights or advice?
+I came across your profile while researching professionals in the [${formattedJobTitle}] space and noticed your impressive background at [${formattedCompanyName}]. I'm currently exploring [specific topic or role, e.g., data engineering, autonomous vehicles, software development], and I'd love to hear about your journey and experiences in this space. Would you be open to sharing your insights or advice?
 
 I'd love to hear how you navigated your career in [Their Field or Industry] and what key factors have influenced your success.
 
